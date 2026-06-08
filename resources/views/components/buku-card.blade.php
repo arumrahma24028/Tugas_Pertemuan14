@@ -2,7 +2,7 @@
     <div class="card-body">
         <div class="row align-items-center">
             {{-- Bagian Cover / Icon Kategori --}}
-            <div class="col-md-2 text-center border-end-md py-2">
+            <div class="col-md-2 text-center border-end py-2">
                 <i class="bi bi-book text-primary" style="font-size: 4rem;"></i>
                 <div class="mt-2">
                     <span class="badge bg-{{ $buku->kategori == 'Programming' ? 'primary' : ($buku->kategori == 'Database' ? 'success' : ($buku->kategori == 'Web Design' ? 'info' : ($buku->kategori == 'Networking' ? 'warning' : 'danger'))) }}">
@@ -41,7 +41,7 @@
             {{-- Bagian Harga, Stok, dan Actions --}}
             <div class="col-md-3 text-end py-2">
                 <h4 class="text-success fw-bold mb-1">
-                    {{ $buku->harga_format }}
+                    {{ $buku->harga_format ?? 'Rp ' . number_format($buku->harga, 0, ',', '.') }}
                 </h4>
                 
                 <div class="mb-3">
@@ -68,9 +68,52 @@
                         <a href="{{ route('buku.edit', $buku->id) }}" class="btn btn-sm btn-warning">
                             <i class="bi bi-pencil"></i> Edit
                         </a>
+                        
+                        {{-- Delete Button dengan SweetAlert --}}
+                        <form action="{{ route('buku.destroy', $buku->id) }}" 
+                            method="POST" 
+                            class="d-inline delete-form">
+                            @csrf
+                            @method('DELETE')
+                            <button type="button" class="btn btn-sm btn-danger w-100 btn-delete" 
+                                    data-judul="{{ $buku->judul }}">
+                                <i class="bi bi-trash"></i> Hapus
+                            </button>
+                        </form>
                     </div>
                 @endif
             </div>
         </div>
     </div>
 </div>
+
+@push('scripts')
+@once
+<script>
+    document.addEventListener('click', function(e) {
+        const targetButton = e.target.closest('.btn-delete');
+        
+        if (targetButton) {
+            e.preventDefault();
+            const form = targetButton.closest('form');
+            const judul = targetButton.getAttribute('data-judul');
+            
+            Swal.fire({
+                title: 'Konfirmasi Hapus',
+                text: `Apakah Anda yakin ingin menghapus buku "${judul}"?`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Ya, Hapus!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        }
+    });
+</script>
+@endonce
+@endpush
