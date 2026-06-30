@@ -1,115 +1,132 @@
-# Tugas Pemrograman Web II Pertemuan 12
+# Tugas Praktikum Pemprograman Web II
 
-## Identitas
+## Nama
 
-* Nama: Arum Rahma Putri Sabrina
-* NIM: 60324028
-* Mata Kuliah: Pemrograman Web 2 (A)
+Nama : Arum Rahma Putri Sabrina
+
+NIM : 60324028
+
+Mata Kuliah : Pemprograman Web II (A)
+
 
 ---
 
-# Tugas 1 - Validation Rules Advanced
+# Tugas 1 - Fitur Pengembalian Buku (40%)
 
-## Fitur yang dibuat
+## Fitur
 
-### Custom Validation Rule untuk Kode Buku
+### 1. Detail Transaksi
 
-Format kode buku:
+Pada halaman detail transaksi tersedia tombol **Kembalikan Buku** untuk melakukan proses pengembalian buku.
 
-```text id="o50i4h"
-BK-[kategori singkat]-[nomor]
+### 2. Perhitungan Denda
+
+Sistem akan menghitung denda secara otomatis apabila buku dikembalikan melewati batas tanggal kembali.
+
+Ketentuan:
+
+- Denda Rp5.000 per hari
+- Tidak ada denda apabila dikembalikan tepat waktu
+
+### 3. Update Status
+
+Setelah buku dikembalikan maka:
+
+- Status berubah menjadi **Dikembalikan**
+- Tanggal dikembalikan tersimpan otomatis
+- Total denda disimpan ke database
+
+### 4. Update Stok Buku
+
+Saat proses pengembalian berhasil, stok buku otomatis bertambah 1.
+
+## Dokumentasi
+
+### Detail transaksi & tombol kembalikan
+
+![Detail Transaksi](image/tugas14_01_1.png)
+
+### Perhitungan denda
+
+![Perhitungan Denda](image/tugas14_01_2.png)
+
+### Status berubah & stok bertambah
+
+![Status Dikembalikan](image/tugas14_01_3.png)
+
+---
+
+# Tugas 2 - Laporan Transaksi (30%)
+
+## Halaman Laporan
+
+URL:
+
+```
+/transaksi/laporan
 ```
 
-Contoh:
+## Filter
 
-```text id="5ct2pd"
-BK-PROG-001
-BK-DB-002
-BK-WEB-010
-```
+- Range tanggal
+- Status transaksi
+- Anggota
 
-### Validation yang diterapkan
+## Informasi yang ditampilkan
 
-* Kode buku wajib diisi
-* Format kode buku harus sesuai aturan
-* Menggunakan custom validation rule Laravel
+- Daftar transaksi
+- Total transaksi
+- Total denda
 
----
+## Export PDF
 
-## Gambar Tugas 1
+Laporan dapat diunduh dalam bentuk PDF menggunakan package Laravel DomPDF.
 
-![Tugas 1](image/tugas4.png)
+## Dokumentasi
 
+### Halaman laporan transaksi
 
----
+![Laporan Transaksi](image/tugas14_02_1.png)
 
-# Tugas 2 - Bulk Delete Operations
+### Filter laporan
 
-## Fitur yang dibuat
+![Filter Laporan](image/tugas14_02_2.png)
 
-### Delete Multiple Buku
+### Hasil filter
 
-User dapat menghapus beberapa data buku sekaligus menggunakan checkbox.
+![Hasil Filter](image/tugas14_02_3.png)
 
----
+### Export PDF
 
-## Fitur pada Halaman Index Buku
-
-### Checkbox per Buku
-
-Digunakan untuk memilih buku yang akan dihapus.
-
-### Select All Checkbox
-
-Digunakan untuk memilih seluruh data buku sekaligus.
-
-### Button Bulk Delete
-
-Digunakan untuk menghapus semua buku yang dipilih.
+![Export PDF](image/tugas14_02_4.png)
 
 ---
 
-## Gambar Tugas 2
+# Tugas 3 - Notifikasi Terlambat (30%)
 
-![Tugas 2](image/tugas5.png)
+## Dashboard
 
+Dashboard memiliki widget **Buku Terlambat** yang menampilkan:
 
----
+- Jumlah transaksi terlambat
+- Daftar anggota yang terlambat
+- Buku yang dipinjam
+- Lama keterlambatan
 
-# Tugas 3 - Export Buku ke CSV
+## Badge Terlambat
 
-## Fitur yang dibuat
+Pada halaman daftar transaksi akan muncul badge merah apabila transaksi telah melewati batas pengembalian.
 
-### Export Data Buku ke CSV
+## Reminder
 
-User dapat mengunduh seluruh data buku dalam format CSV.
+Pada halaman detail transaksi akan muncul peringatan apabila buku sudah melewati batas pengembalian.
 
----
+## Dokumentasi
 
-## Fitur pada Halaman Index
+### Dashboard Buku Terlambat
 
-### Button Export CSV
+![Dashboard Buku Terlambat](image/tugas14_03_1.png)
 
-Button digunakan untuk download file CSV.
+### Badge & Reminder Terlambat
 
----
-
-### Data yang di-export
-
-* Kode Buku
-* Judul
-* Kategori
-* Pengarang
-* Penerbit
-* Tahun Terbit
-* ISBN
-* Harga
-* Stok
-
----
-
-## Gambar Tugas 3
-
-![Tugas 3](image/tugas6.png)
-
-
+![Badge Terlambat](image/tugas14_03_2.png)
