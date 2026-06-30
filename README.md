@@ -92,7 +92,7 @@ Laporan dapat diunduh dalam bentuk PDF menggunakan package Laravel DomPDF.
 
 ![Filter Laporan](image/tugas14_02_2.png)
 
-### Hasil filter
+### Download PDF
 
 ![Hasil Filter](image/tugas14_02_3.png)
 
