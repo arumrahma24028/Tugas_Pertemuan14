@@ -60,7 +60,6 @@
         </div>
     </div>
 </div>
-
 {{-- Form Advanced Search & Filter --}}
 <div class="card mb-4">
     <div class="card-body bg-light">
